@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
 import style from '../css/Login.module.css'
+import { Link } from 'react-router-dom'
 
 function Login() {
-    const[email, setEmail] = useState('')
-    const[password, setPassword] = useState('');
+  const[formData, setFormData] = useState({
+      email:'',
+      password:''
+  })
 
-    console.log(email, password)
 
+  const formDataHandler = (event) =>{
+    const {name, value} = event.target;
+    setFormData({...formData, [name]:value});
+  }
+
+  const formSubmitHandler = (event) =>{
+    event.preventDefault();
+    console.log(formData)
+  }
 
   return (
     <div className={style.mainContainer}>
@@ -15,27 +26,31 @@ function Login() {
        <div className={style.card}>
             <p className={style.cardHeader}>Login to CodeNCoffe</p>
 
+            <form onSubmit={formSubmitHandler}>
             <div className={style.emailDetails}>
                 <label htmlFor="email">Email</label>
-                <input type="text" placeholder='xyz@gmail.com'
-                value={email} 
-                onChange={(e)=>setEmail(e.target.value)}
+                <input type="email" placeholder='xyz@gmail.com'
+                name='email'
+                value={formData.email}
+                onChange={formDataHandler}             
                 />                
                 
                 <label htmlFor="password">Password</label>
-                <input type="text" placeholder='********'
-                value={password}
-                onChange={(e)=>setPassword(e.target.value)}
+                <input type="password" placeholder='********' 
+                name='password'
+                value={formData.password}
+                onChange={formDataHandler} 
                 />               
             </div>
 
             <div className={style.btnContainer}>
                 <button className={style.loginBtn}>Login</button>
             </div>
+            </form>
 
             <div className={style.linkContainer}>
-                <a className={style.bottomLinks} href="forgot-password">Forgot Password</a>
-                <a className={style.bottomLinks} href="sign-up">Sign Up</a>
+                <Link className={style.bottomLinks} to="/forgot-password">Forgot Password</Link>
+                <Link className={style.bottomLinks} to="/signup">Sign Up</Link>
             </div>
 
        </div>
