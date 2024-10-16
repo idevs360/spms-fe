@@ -12,7 +12,8 @@ h2{
 
 .card{
     width: 300px;
-    box-shadow: 2px 2px 3px 3px #F3E5F5;
+    box-shadow: 2px 3px 4px 4px #F3E5F5;
+    border: 1px;
     border-radius: 5px;
     padding: 15px;
 }
